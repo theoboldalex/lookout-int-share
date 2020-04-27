@@ -1,33 +1,41 @@
 <template>
   <div>
-    <nav>
-      <div class="wrapper">
-        <div class="nav-container">
-          <div class="left">
-            <router-link :to="{ name: 'Index' }" class="logo">
-              L<span class="blue">OO</span>KOUT
-            </router-link>
-            <small class="grey">The Intelligence Sharing Platform</small>
-          </div>
-          <div class="right">
-            <ul>
-              <li v-if="!user">
-                <router-link :to="{ name: 'Signup' }">Signup</router-link>
-              </li>
-              <li v-if="!user">
-                <router-link :to="{ name: 'Login' }">Login</router-link>
-              </li>
-              <li v-if="user">
-                <p>{{ user.email }}</p>
-              </li>
-              <li v-if="user">
-                <a @click="logout">Logout</a>
-              </li>
-              <li v-if="user && this.$route.path == '/'">
-                <router-link :to="{ name: 'CMS' }">Publish</router-link>
-              </li>
-            </ul>
-          </div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <router-link :to="{ name: 'Index' }" class="navbar-brand">OSINT : SRC</router-link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExampleDefault"
+          aria-controls="navbarsExampleDefault"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav ml-auto">
+            <li v-if="!user" class="nav-item">
+              <router-link :to="{ name: 'Signup' }" class="nav-link">Signup</router-link>
+            </li>
+            <li v-if="!user" class="nav-item">
+              <router-link :to="{ name: 'Login' }" class="nav-link">Login</router-link>
+            </li>
+            <li v-if="user" class="nav-item">
+              <router-link :to="{ name: 'Profile' }" class="nav-link">{{ user.email }}</router-link>
+            </li>
+            <li v-if="user" class="nav-item">
+              <a @click="logout" class="nav-link">Logout</a>
+            </li>
+            <li
+              v-if="user && this.$route.path == '/' || this.$route.path == '/profile'"
+              class="nav-item"
+            >
+              <router-link :to="{ name: 'CMS' }" class="nav-link">Publish</router-link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -70,7 +78,7 @@ export default {
 </script>
 
 <style>
-:root {
+/* :root {
   --blue-color: #1976d2;
   --grey-color: #757575;
 }
@@ -123,5 +131,5 @@ export default {
 
 .blue {
   color: var(--blue-color);
-}
+} */
 </style>

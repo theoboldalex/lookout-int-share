@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Index from "@/components/Index";
 import CMS from "@/components/CMS";
+import Profile from "@/components/profile";
 import Login from "@/components/Login";
 import Signup from "@/components/Signup";
 import firebase from "firebase";
@@ -22,6 +23,11 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/profile",
+      name: "Profile",
+      component: Profile
     },
     {
       path: "/login",
