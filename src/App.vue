@@ -27,6 +27,10 @@ export default {
   --font: "Rubik", sans-serif;
 }
 
+.accent-text {
+  color: var(--red);
+}
+
 .bg {
   background-color: var(--dark);
 }

@@ -88,15 +88,17 @@ export default {
       this.infoWindowPos = m.position;
       this.infoOptions.content = `<h2>${m.headline}</h2>
                                   <p>${m.description}<p>
-                                  <small class="grey-text">
+                                  <div class="d-flex flex-column">
+                                  <small class="text-secondary mb-1">
                                   ${m.incidentType}</small>
-                                  <small>Threat: ${m.severity
+                                  <small class="mb-1">Threat: ${m.severity
                                     .charAt(0)
                                     .toUpperCase() +
                                     m.severity.slice(1)}</small>
                                   <a href="${
                                     m.url
-                                  }" target="_blank" class="btn-info">Read more</a>
+                                  }" target="_blank" class="btn btn-sm btn-block btn-custom">Read more</a>
+                                  </div>
                                   `;
 
       //check if its the same marker that was selected if yes toggle

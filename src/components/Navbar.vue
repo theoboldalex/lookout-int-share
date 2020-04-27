@@ -1,9 +1,9 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-md fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
       <div class="container">
         <router-link :to="{ name: 'Index' }" class="navbar-brand">
-          <img src="@/assets/osint-src-logo.png" alt="logo" height="50px" /> OSINT : SRC
+          <img src="@/assets/osint-src-logo.png" alt="logo" height="50px" /> LOOKOUT
         </router-link>
         <button
           class="navbar-toggler"
@@ -91,17 +91,22 @@ export default {
   color: var(--light);
 }
 
+.navbar-brand:hover {
+  color: var(--light);
+}
+
 .red {
   color: var(--red);
 }
 
 .nav-link {
-  color: var(--light);
   font-family: var(--font);
-  transition: filter 0.3s ease;
+  transition: all 0.4s ease;
 }
 
-.nav-link:hover {
-  filter: brightness(70%);
+@media (max-width: 800px;) {
+  .navbar-brand {
+    font-size: 0.8em;
+  }
 }
 </style>
