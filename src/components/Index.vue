@@ -1,7 +1,7 @@
 <template>
   <div>
     <GmapMap
-      id="map"
+      id="map_canvas"
       :center="center"
       :zoom="zoom"
       :options="{
@@ -115,20 +115,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 html,
 body {
   margin: 0;
   padding: 0;
 }
 
-#map {
+#map_canvas {
   height: 100vh;
   width: 100vw;
   position: absolute;
   top: 0;
   left: 0;
   z-index: -2;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
 }
 
 .btn-info {

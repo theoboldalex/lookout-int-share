@@ -1,8 +1,10 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-md fixed-top">
       <div class="container">
-        <router-link :to="{ name: 'Index' }" class="navbar-brand">OSINT : SRC</router-link>
+        <router-link :to="{ name: 'Index' }" class="navbar-brand">
+          <img src="@/assets/osint-src-logo.png" alt="logo" height="50px" /> OSINT : SRC
+        </router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -26,8 +28,8 @@
             <li v-if="user" class="nav-item">
               <router-link :to="{ name: 'Profile' }" class="nav-link">{{ user.email }}</router-link>
             </li>
-            <li v-if="user" class="nav-item">
-              <a @click="logout" class="nav-link">Logout</a>
+            <li v-if="user" class="nav-item" @click="logout">
+              <router-link :to="{ name: 'Login' }" class="nav-link">Logout</router-link>
             </li>
             <li
               v-if="user && this.$route.path == '/' || this.$route.path == '/profile'"
@@ -77,59 +79,29 @@ export default {
 };
 </script>
 
-<style>
-/* :root {
-  --blue-color: #1976d2;
-  --grey-color: #757575;
+<style scoped>
+.navbar {
+  background-color: var(--dark);
 }
 
-* {
-  font-family: "Muli", sans-serif;
-}
-
-.wrapper {
-  height: 75px;
-  background: #fff;
-}
-
-.nav-container {
-  justify-content: space-between;
-  display: flex;
-  align-items: center;
-  margin: 0 10%;
-  height: 100%;
-}
-
-.right ul li {
-  display: inline-block;
-  margin-left: 1.4rem;
-  z-index: 3;
-}
-
-.logo {
-  font-size: 2rem;
+.navbar-brand {
+  font-family: var(--font);
   font-weight: 900;
+  font-size: 24px;
+  color: var(--light);
 }
 
-.logo,
-.right ul li a {
-  text-decoration: none;
-  color: #000;
-  cursor: pointer;
+.red {
+  color: var(--red);
 }
 
-.right ul li a {
-  font-weight: 300;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
+.nav-link {
+  color: var(--light);
+  font-family: var(--font);
+  transition: filter 0.3s ease;
 }
 
-.grey,
-.right ul li a:hover {
-  color: var(--grey-color);
+.nav-link:hover {
+  filter: brightness(70%);
 }
-
-.blue {
-  color: var(--blue-color);
-} */
 </style>
