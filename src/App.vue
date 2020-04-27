@@ -27,6 +27,26 @@ export default {
   --font: "Rubik", sans-serif;
 }
 
+.bg {
+  background-color: var(--dark);
+}
+
+.form-page {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: var(--font);
+}
+
+.card {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--light);
+}
+
+.form {
+  width: 400px;
+}
+
 .btn-custom {
   background-color: var(--red);
   color: var(--light);

@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-    <div class="container login-page">
+    <div class="container form-page">
       <div class="card">
         <div class="card-body">
           <h2>Login</h2>
@@ -74,23 +74,4 @@ export default {
 </script>
 
 <style scoped>
-.bg {
-  background-color: var(--dark);
-}
-
-.login-page {
-  height: 100vh;
-  display: grid;
-  place-items: center;
-  font-family: var(--font);
-}
-
-.card {
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  background-color: var(--light);
-}
-
-.form {
-  width: 400px;
-}
 </style>
