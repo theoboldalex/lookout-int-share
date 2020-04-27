@@ -3,7 +3,8 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
       <div class="container">
         <router-link :to="{ name: 'Index' }" class="navbar-brand">
-          <img src="@/assets/osint-src-logo.png" alt="logo" height="50px" /> LOOKOUT
+          <img src="@/assets/osint-src-logo.png" alt="logo" height="50px" /> OSINT
+          <span class="accent-text">:</span> SRC
         </router-link>
         <button
           class="navbar-toggler"
@@ -88,7 +89,7 @@ export default {
   font-family: var(--font);
   font-weight: 900;
   font-size: 24px;
-  color: var(--light);
+  color: var(--light) !important;
 }
 
 .navbar-brand:hover {

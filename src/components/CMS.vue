@@ -23,72 +23,90 @@
         @click="info(m, index)"
       ></gmap-marker>
     </gmap-map>
-    <div class="container">
-      <gmap-autocomplete
-        @place_changed="setPlace"
-        class="form-field searchBar"
-      ></gmap-autocomplete>
+    <div class="container mt-3">
+      <div class="form-group">
+        <label for="search">Search:</label>
+        <gmap-autocomplete @place_changed="setPlace" class="form-control"></gmap-autocomplete>
+      </div>
 
       <form @submit="createAlert">
-        <input
-          type="text"
-          placeholder="Latitude"
-          class="form-field form-split"
-          v-model="this.center.lat"
-        />
-        <input
-          type="text"
-          placeholder="Longitude"
-          class="form-field form-split"
-          v-model="this.center.lng"
-        />
+        <div class="row">
+          <div class="col">
+            <label for="lat">Latitude:</label>
+            <input
+              id="lat"
+              type="text"
+              placeholder="Latitude"
+              class="form-control"
+              v-model="this.center.lat"
+            />
+          </div>
+          <div class="col">
+            <label for="long">Longitude:</label>
+            <input
+              id="long"
+              type="text"
+              placeholder="Longitude"
+              class="form-control"
+              v-model="this.center.lng"
+            />
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <label for="headline">Headline:</label>
+          <input
+            id="headline"
+            type="text"
+            placeholder="Headline"
+            class="form-control"
+            v-model="headline"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea
+            cols="30"
+            rows="10"
+            placeholder="Describe the incident"
+            class="form-control"
+            v-model="description"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="url">Source:</label>
+          <input
+            id="url"
+            type="text"
+            placeholder="URL for more info"
+            class="form-control"
+            v-model="auditSource"
+          />
+        </div>
+        <div class="form-group">
+          <label for="incident-type">Incident type:</label>
+          <select
+            name="incident-type"
+            id="incident-type"
+            class="form-control"
+            v-model="incidentType"
+          >
+            <option value="Select an incident type" selected disabled>Incident type</option>
+            <option value="Accident">Accident</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="severity">Severity:</label>
+          <select name="severity" id="severity" class="form-control" v-model="severity">
+            <option value="Select a threat level" selected disabled>Severity</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
 
-        <input
-          type="text"
-          placeholder="Headline"
-          class="form-field"
-          v-model="headline"
-        />
-        <textarea
-          cols="30"
-          rows="10"
-          placeholder="Describe the incident"
-          class="form-field"
-          v-model="description"
-        ></textarea>
-        <input
-          type="text"
-          placeholder="URL for more info"
-          class="form-field"
-          v-model="auditSource"
-        />
-        <select
-          name="incident-type"
-          id="incident-type"
-          class="form-field"
-          v-model="incidentType"
-        >
-          <option value="Select an incident type" selected disabled
-            >Incident type</option
-          >
-          <option value="Accident">Accident</option>
-        </select>
-        <select
-          name="severity"
-          id="severity"
-          class="form-field"
-          v-model="severity"
-        >
-          <option value="Select a threat level" selected disabled
-            >Severity</option
-          >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-        <button id="create-incident" type="submit" class="form-button">
-          Create Alert
-        </button>
+        <div class="form-group mb-5">
+          <button id="create-incident" type="submit" class="btn btn-block btn-custom">Create Alert</button>
+        </div>
       </form>
     </div>
   </div>
@@ -172,69 +190,8 @@ export default {
 };
 </script>
 
-<style>
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
+<style scoped>
 #smallMap {
   height: 40vh;
-}
-
-.searchBar {
-  width: 40%;
-}
-
-.container {
-  margin: 0 10%;
-}
-
-.form-field {
-  margin-top: 20px;
-  font-size: 16px;
-  padding: 10px;
-  width: 100%;
-  border-radius: 4px;
-  border: 2px solid #f0f0f0;
-}
-
-form select {
-  font-size: 16px;
-  /* padding: 20px; */
-  width: 100%;
-  border-radius: 4px;
-  border: 2px solid #f0f0f0;
-}
-
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: none;
-}
-
-.form-button {
-  cursor: pointer;
-  background: #3498db;
-  border: 2px solid #3498db;
-  border-radius: 4px;
-  color: #fff;
-  display: block;
-  font-size: 16px;
-  padding: 10px;
-  margin: 20px 0;
-  width: 100%;
-  transition: 0.3s ease-in-out;
-}
-
-.form-button:hover {
-  filter: brightness(80%);
 }
 </style>
