@@ -23,6 +23,18 @@ export default {
   --dark: #232323;
   --light: #dedede;
   --red: #bb4935;
+  --hover-red: #a2301c;
   --font: "Rubik", sans-serif;
+}
+
+.btn-custom {
+  background-color: var(--red);
+  color: var(--light);
+  transition: all 0.5s ease;
+}
+
+.btn-custom:hover {
+  color: var(--light);
+  background-color: var(--hover-red);
 }
 </style>

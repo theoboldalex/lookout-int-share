@@ -11,7 +11,7 @@ const options = [
     elementType: "labels.icon",
     stylers: [
       {
-        visibility: "off"
+        visibility: "on"
       }
     ]
   },
@@ -53,7 +53,7 @@ const options = [
     featureType: "administrative.land_parcel",
     stylers: [
       {
-        visibility: "off"
+        visibility: "on"
       }
     ]
   },

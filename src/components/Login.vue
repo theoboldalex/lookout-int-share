@@ -1,30 +1,38 @@
 <template>
-  <div class="wrapper">
-    <div class="container">
-      <form id="form" class="form" @submit.prevent="login">
-        <h2>Login</h2>
-        <div class="form-control">
-          <label for="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            placeholder="Enter email"
-            v-model="email"
-          />
-          <small>Error message</small>
+  <div class="bg">
+    <div class="container login-page">
+      <div class="card">
+        <div class="card-body">
+          <h2>Login</h2>
+          <form id="form" class="form" @submit.prevent="login">
+            <div class="form-group">
+              <label for="email">Email: *</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                v-model="email"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password: *</label>
+              <input
+                type="password"
+                id="email"
+                placeholder="Enter Password"
+                v-model="password"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <button class="form-control btn btn-custom">Login</button>
+            </div>
+          </form>
         </div>
-        <div class="form-control">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter password"
-            v-model="password"
-          />
-          <small>Error message</small>
-        </div>
-        <button class="form-button">Submit</button>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -66,102 +74,23 @@ export default {
 </script>
 
 <style scoped>
-:root {
-  --success-color: #2ecc71;
-  --error-color: #e74c3c;
+.bg {
+  background-color: var(--dark);
 }
 
-* {
-  box-sizing: border-box;
+.login-page {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: var(--font);
 }
 
-.wrapper {
-  background: #fff;
-  font-family: "Muli", sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  margin: 0;
-}
-
-.container {
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  width: 400px;
-}
-
-h2 {
-  text-align: center;
-  margin: 0 0 20px;
+.card {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--light);
 }
 
 .form {
-  padding: 30px 40px;
-}
-
-.form-control {
-  margin-bottom: 10px;
-  padding-bottom: 20px;
-  position: relative;
-}
-
-.form-control label {
-  color: #777;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-control input {
-  border: 2px solid #f0f0f0;
-  border-radius: 4px;
-  display: block;
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-}
-
-.form-control input:focus {
-  outline: 0;
-  border-color: #777;
-}
-
-.form-control.success input {
-  border-color: var(--success-color);
-}
-
-.form-control.error input {
-  border-color: var(--error-color);
-}
-
-.form-control small {
-  color: var(--error-color);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  visibility: hidden;
-}
-
-.form-control.error small {
-  visibility: visible;
-}
-
-.form-button {
-  cursor: pointer;
-  background: #3498db;
-  border: 2px solid #3498db;
-  border-radius: 4px;
-  color: #fff;
-  display: block;
-  font-size: 16px;
-  padding: 10px;
-  margin-top: 20px;
-  width: 100%;
-  transition: 0.3s ease-in-out;
-}
-
-.form-button:hover {
-  filter: brightness(80%);
+  width: 400px;
 }
 </style>
