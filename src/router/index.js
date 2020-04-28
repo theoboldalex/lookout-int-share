@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Index from "@/components/Index";
 import CMS from "@/components/CMS";
-import Profile from "@/components/profile";
+import Profile from "@/components/Profile";
 import Login from "@/components/Login";
 import Signup from "@/components/Signup";
 import firebase from "firebase";
@@ -25,11 +25,6 @@ const router = new Router({
       }
     },
     {
-      path: "/profile",
-      name: "Profile",
-      component: Profile
-    },
-    {
       path: "/login",
       name: "Login",
       component: Login
@@ -38,6 +33,14 @@ const router = new Router({
       path: "/signup",
       name: "Signup",
       component: Signup
+    },
+    {
+      path: "/profile/:id",
+      name: "Profile",
+      component: Profile,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 });

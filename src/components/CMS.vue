@@ -26,7 +26,11 @@
     <div class="container mt-3">
       <div class="form-group">
         <label for="search">Search:</label>
-        <gmap-autocomplete @place_changed="setPlace" class="form-control"></gmap-autocomplete>
+        <gmap-autocomplete
+          @place_changed="setPlace"
+          class="form-control"
+          :options="{ fields: ['geometry'] }"
+        ></gmap-autocomplete>
       </div>
 
       <form @submit="createAlert">
@@ -90,14 +94,23 @@
             class="form-control"
             v-model="incidentType"
           >
-            <option value="Select an incident type" selected disabled>Incident type</option>
+            <option value="Select an incident type" selected disabled
+              >Incident type</option
+            >
             <option value="Accident">Accident</option>
           </select>
         </div>
         <div class="form-group">
           <label for="severity">Severity:</label>
-          <select name="severity" id="severity" class="form-control" v-model="severity">
-            <option value="Select a threat level" selected disabled>Severity</option>
+          <select
+            name="severity"
+            id="severity"
+            class="form-control"
+            v-model="severity"
+          >
+            <option value="Select a threat level" selected disabled
+              >Severity</option
+            >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
@@ -105,7 +118,13 @@
         </div>
 
         <div class="form-group mb-5">
-          <button id="create-incident" type="submit" class="btn btn-block btn-custom">Create Alert</button>
+          <button
+            id="create-incident"
+            type="submit"
+            class="btn btn-block btn-custom"
+          >
+            Create Alert
+          </button>
         </div>
       </form>
     </div>
@@ -121,7 +140,7 @@ export default {
   name: "CMS",
   data() {
     return {
-      center: { lat: null, lng: null },
+      center: { lat: 53, lng: 3 },
       options: options,
       markers: [],
       places: [],
@@ -130,7 +149,9 @@ export default {
       headline: "",
       description: "",
       auditSource: "",
-      incidentType: ""
+      incidentType: "",
+      severity: "",
+      user_id: ""
     };
   },
 
@@ -164,7 +185,8 @@ export default {
           auditSource: this.auditSource,
           incidentType: this.incidentType,
           severity: this.severity,
-          timestamp: Date.now()
+          timestamp: Date.now(),
+          user_id: firebase.auth().currentUser.uid
         })
         .catch(err => {
           console.log(err);

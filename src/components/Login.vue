@@ -20,7 +20,7 @@
               <label for="password">Password: *</label>
               <input
                 type="password"
-                id="email"
+                id="password"
                 placeholder="Enter Password"
                 v-model="password"
                 class="form-control"
@@ -58,7 +58,7 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(cred => {
-            console.log(cred.user);
+            //console.log(cred.user);
             this.$router.push({ name: "CMS" });
           })
           .catch(err => {
@@ -73,5 +73,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

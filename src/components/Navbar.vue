@@ -3,8 +3,8 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
       <div class="container">
         <router-link :to="{ name: 'Index' }" class="navbar-brand">
-          <img src="@/assets/osint-src-logo.png" alt="logo" height="50px" /> OSINT
-          <span class="accent-text">:</span> SRC
+          <img src="@/assets/osint-src-logo.png" alt="logo" height="50px" />
+          OSINT <span class="accent-text">:</span> SRC
         </router-link>
         <button
           class="navbar-toggler"
@@ -21,22 +21,37 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav ml-auto">
             <li v-if="!user" class="nav-item">
-              <router-link :to="{ name: 'Signup' }" class="nav-link">Signup</router-link>
+              <router-link :to="{ name: 'Signup' }" class="nav-link"
+                >Signup</router-link
+              >
             </li>
             <li v-if="!user" class="nav-item">
-              <router-link :to="{ name: 'Login' }" class="nav-link">Login</router-link>
+              <router-link :to="{ name: 'Login' }" class="nav-link"
+                >Login</router-link
+              >
             </li>
             <li v-if="user" class="nav-item">
-              <router-link :to="{ name: 'Profile' }" class="nav-link">{{ user.email }}</router-link>
+              <router-link
+                :to="{ name: 'Profile', params: { id: user_id } }"
+                class="nav-link"
+                >{{ user.email }}</router-link
+              >
             </li>
             <li v-if="user" class="nav-item" @click="logout">
-              <router-link :to="{ name: 'Login' }" class="nav-link">Logout</router-link>
+              <router-link :to="{ name: 'Login' }" class="nav-link"
+                >Logout</router-link
+              >
             </li>
             <li
-              v-if="user && this.$route.path == '/' || this.$route.path == '/profile'"
+              v-if="
+                (user && this.$route.path == '/') ||
+                  this.$route.path == `/profile/${user_id}`
+              "
               class="nav-item"
             >
-              <router-link :to="{ name: 'CMS' }" class="nav-link">Publish</router-link>
+              <router-link :to="{ name: 'CMS' }" class="nav-link"
+                >Publish</router-link
+              >
             </li>
           </ul>
         </div>
@@ -52,7 +67,8 @@ export default {
   name: "Navbar",
   data() {
     return {
-      user: null
+      user: null,
+      user_id: null
     };
   },
 
@@ -68,10 +84,11 @@ export default {
   },
 
   created() {
-    //let user = firebase.auth().currentUser;
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.user = user;
+        this.user = firebase.auth().currentUser;
+        this.user_id = firebase.auth().currentUser.uid;
+        //console.log(this.user);
       } else {
         this.user = null;
       }
