@@ -14,7 +14,9 @@
           <h4>{{ incident.headline }}</h4>
           <p>{{ incident.description }}</p>
           <button class="btn btn-warning">Edit</button>
-          <button class="btn btn-danger">Delete</button>
+          <button @click="deleteIncident(incident, i)" class="btn btn-danger">
+            Delete
+          </button>
         </div>
       </div>
     </div>
@@ -45,7 +47,7 @@ export default {
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          (this.user = doc.data()), (this.user.id = doc.id);
+          this.user = doc.data();
         });
       });
 
@@ -57,20 +59,36 @@ export default {
         this.profile = user.data();
       });
 
-    // comments
+    // incidents
     db.collection("incidents")
       .where("user_id", "==", this.$route.params.id)
       .onSnapshot(snapshot => {
+        this.incidents = [];
         snapshot.forEach(doc => {
           this.incidents.push({
             headline: doc.data().headline,
             description: doc.data().description,
             lat: doc.data().lat,
             lng: doc.data().lng,
-            auditSource: doc.data().auditSource
+            auditSource: doc.data().auditSource,
+            id: doc.id
           });
         });
       });
+  },
+
+  methods: {
+    deleteIncident(incident, i) {
+      db.collection("incidents")
+        .doc(incident.id)
+        .delete()
+        .then(() => {
+          console.log(`item ${incident.id} deleted.`);
+          this.incidents = this.incidents.filter(inc => {
+            return inc.id != incident.id;
+          });
+        });
+    }
   }
 };
 </script>
