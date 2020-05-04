@@ -13,7 +13,13 @@
         <div class="card-body">
           <h4>{{ incident.headline }}</h4>
           <p>{{ incident.description }}</p>
-          <button class="btn btn-warning">Edit</button>
+          <router-link
+            :to="{ name: 'EditIncident', params: { id: incident.id } }"
+          >
+            <button class="btn btn-warning">
+              Edit
+            </button>
+          </router-link>
           <button @click="deleteIncident(incident, i)" class="btn btn-danger">
             Delete
           </button>

@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Index from "@/components/Index";
 import CMS from "@/components/CMS";
 import Profile from "@/components/Profile";
+import EditIncident from "@/components/EditIncident";
 import Login from "@/components/Login";
 import Signup from "@/components/Signup";
 import firebase from "firebase";
@@ -38,6 +39,14 @@ const router = new Router({
       path: "/profile/:id",
       name: "Profile",
       component: Profile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/edit/:id",
+      name: "EditIncident",
+      component: EditIncident,
       meta: {
         requiresAuth: true
       }
