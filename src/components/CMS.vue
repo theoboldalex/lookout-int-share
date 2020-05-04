@@ -98,13 +98,13 @@
               >Incident type</option
             >
             <option value="Accident">Accident</option>
-            <option value="Accident">Firearms</option>
-            <option value="Accident">Terrorism</option>
-            <option value="Accident">Health</option>
-            <option value="Accident">Conflict</option>
-            <option value="Accident">Political</option>
-            <option value="Accident">Crime</option>
-            <option value="Accident">Weather</option>
+            <option value="Firearms">Firearms</option>
+            <option value="Terrorism">Terrorism</option>
+            <option value="Health">Health</option>
+            <option value="Conflict">Conflict</option>
+            <option value="Political">Political</option>
+            <option value="Crime">Crime</option>
+            <option value="Weather">Weather</option>
           </select>
         </div>
         <div class="form-group">
