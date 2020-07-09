@@ -149,6 +149,7 @@ export default {
 
   mounted() {
     //this.geolocate();
+    this.populateForm();
   },
 
   methods: {
@@ -198,6 +199,23 @@ export default {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
+      });
+    },
+    populateForm() {
+      let ref = db.collection("incidents").doc(this.$route.params.id);
+
+      // get data object from firestore
+      ref.get().then(doc => {
+        console.log(doc.data());
+
+        // set props to data from firestore
+        this.center.lat = doc.data().lat;
+        this.center.lng = doc.data().lng;
+        this.headline = doc.data().headline;
+        this.description = doc.data().description;
+        this.auditSource = doc.data().auditSource;
+        this.incidentType = doc.data().incidentType;
+        this.severity = doc.data().severity;
       });
     }
   }
