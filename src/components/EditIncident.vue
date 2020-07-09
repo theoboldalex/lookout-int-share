@@ -33,7 +33,7 @@
         ></gmap-autocomplete>
       </div>
 
-      <form @submit="createAlert">
+      <form @submit="updateAlert">
         <div class="row">
           <div class="col">
             <label for="lat">Latitude:</label>
@@ -116,7 +116,7 @@
         </div>
 
         <div class="form-group mb-5">
-          <button id="create-incident" type="submit" class="btn btn-block btn-custom">Create Alert</button>
+          <button id="create-incident" type="submit" class="btn btn-block btn-warning">Update Alert</button>
         </div>
       </form>
     </div>
@@ -168,9 +168,10 @@ export default {
         this.currentPlace = null;
       }
     },
-    createAlert() {
+    updateAlert() {
       db.collection("incidents")
-        .add({
+        .doc(this.$route.params.id)
+        .set({
           lat: this.center.lat,
           lng: this.center.lng,
           headline: this.headline,
@@ -180,10 +181,8 @@ export default {
           severity: this.severity,
           timestamp: Date.now(),
           user_id: firebase.auth().currentUser.uid
-        })
-        .catch(err => {
-          console.log(err);
         });
+
       (this.places = []),
         (this.lat = null),
         (this.lng = null),
@@ -206,8 +205,6 @@ export default {
 
       // get data object from firestore
       ref.get().then(doc => {
-        console.log(doc.data());
-
         // set props to data from firestore
         this.center.lat = doc.data().lat;
         this.center.lng = doc.data().lng;
