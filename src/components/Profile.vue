@@ -7,22 +7,17 @@
           type="text"
           placeholder="Search for an incident..."
           class="form-control mb-2"
+          v-model="searchQuery"
         />
       </div>
-      <div class="card mb-3" v-for="(incident, i) in incidents" :key="i">
+      <div class="card mb-3" v-for="(incident, i) in filteredIncidents" :key="i">
         <div class="card-body">
           <h4>{{ incident.headline }}</h4>
           <p>{{ incident.description }}</p>
-          <router-link
-            :to="{ name: 'EditIncident', params: { id: incident.id } }"
-          >
-            <button class="btn btn-warning">
-              Edit
-            </button>
+          <router-link :to="{ name: 'EditIncident', params: { id: incident.id } }">
+            <button class="btn btn-warning">Edit</button>
           </router-link>
-          <button @click="deleteIncident(incident, i)" class="btn btn-danger">
-            Delete
-          </button>
+          <button @click="deleteIncident(incident, i)" class="btn btn-danger">Delete</button>
         </div>
       </div>
     </div>
@@ -40,7 +35,8 @@ export default {
       profile: null,
       feedback: null,
       user: null,
-      incidents: []
+      incidents: [],
+      searchQuery: ""
     };
   },
 
@@ -94,6 +90,13 @@ export default {
             return inc.id != incident.id;
           });
         });
+    }
+  },
+  computed: {
+    filteredIncidents() {
+      return this.incidents.filter(incident => {
+        return incident.headline.toLowerCase().includes(this.searchQuery);
+      });
     }
   }
 };
