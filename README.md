@@ -1,21 +1,5 @@
-# lookout-int
+# OSINT:SRC
 
-> A Vue.js project
+Osint:Src is a platform designed for users to share intelligence tip offs and security threats to a global audience. It leverages the power of Google's Firebase and Firestore to provide secure, real time updates to users when new incidents are added to the database.
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+The project's front end runs on Vue Js, providing a slick UX and by utilising a component based UI makes maintaining and developing the project simple.
