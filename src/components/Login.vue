@@ -46,30 +46,30 @@ export default {
     return {
       email: null,
       password: null,
-      feedback: null
+      feedback: null,
     };
   },
 
   methods: {
+    // log a user in
     login() {
       if (this.email && this.password) {
         console.log("working");
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
-          .then(cred => {
-            //console.log(cred.user);
+          .then((cred) => {
             this.$router.push({ name: "CMS" });
           })
-          .catch(err => {
+          .catch((err) => {
             this.feedback = err.message;
           });
         this.feedback = null;
       } else {
         this.feedback = "Please populate both fields.";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

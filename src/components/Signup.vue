@@ -1,33 +1,4 @@
 <template>
-  <!-- <div class="wrapper">
-    <div class="container">
-      <form id="form" class="form" @submit.prevent="signup">
-        <h2>Signup</h2>
-        <div class="form-control">
-          <label for="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            placeholder="Enter email"
-            v-model="email"
-          />
-          <small>Error message</small>
-        </div>
-        <div class="form-control">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter password"
-            v-model="password"
-          />
-          <small>Error message</small>
-        </div>
-        <button>Submit</button>
-      </form>
-    </div>
-  </div>-->
-
   <div class="bg">
     <div class="container form-page">
       <div class="card">
@@ -88,40 +59,34 @@ export default {
       email: null,
       password: null,
       feedback: null,
-      slug: null
+      slug: null,
     };
   },
 
   methods: {
+    // register a user
     signup() {
       if (this.alias && this.email && this.password) {
         this.slug = slugify(this.alias, {
           replacement: "-",
           remove: /[$*_+~.()'"!\-:@]/g,
-          lower: true
+          lower: true,
         });
-        // let checkAlias = firebase.functions().httpsCallable("checkAlias");
-        // checkAlias({ slug: this.slug }).then(result => {
-        //   console.log(result);
-        //   if (!result.data.unique) {
-        //     this.feedback = "This alias already exists.";
-        //   } else {
+
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then(cred => {
-            db.collection("users")
-              .doc(this.slug)
-              .set({
-                alias: this.alias,
-                geolocation: null,
-                user_id: cred.user.uid
-              });
+          .then((cred) => {
+            db.collection("users").doc(this.slug).set({
+              alias: this.alias,
+              geolocation: null,
+              user_id: cred.user.uid,
+            });
           })
           .then(() => {
             this.$router.push({ name: "Index" });
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
             this.feedback = err.message;
           });
@@ -131,8 +96,8 @@ export default {
       } else {
         this.feedback = "You must populate all fields.";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
