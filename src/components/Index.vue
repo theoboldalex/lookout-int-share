@@ -12,7 +12,7 @@
         fullscreenControl: false,
         maxZoom: 15,
         minZoom: 2,
-        styles: options
+        styles: options,
       }"
     >
       <GmapMarker
@@ -44,7 +44,7 @@ export default {
     return {
       center: {
         lat: 30,
-        lng: 3
+        lng: 3,
       },
       zoom: 2,
       options: options,
@@ -55,9 +55,9 @@ export default {
         content: "",
         pixelOffset: {
           width: 0,
-          height: -35
-        }
-      }
+          height: -35,
+        },
+      },
     };
   },
 
@@ -66,22 +66,24 @@ export default {
   },
 
   methods: {
+    // create markers from db and add to data prop
     listMarkers() {
       db.collection("incidents")
         .get()
-        .then(snapshot => {
-          snapshot.forEach(doc => {
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
             this.markers.push({
               position: { lat: doc.data().lat, lng: doc.data().lng },
               headline: doc.data().headline,
               description: doc.data().description,
               url: doc.data().auditSource,
               incidentType: doc.data().incidentType,
-              severity: doc.data().severity
+              severity: doc.data().severity,
             });
           });
         });
     },
+    // open info window and display data
     info(m, i) {
       this.center = m.position;
       this.zoom = 6;
@@ -91,10 +93,10 @@ export default {
                                   <div class="d-flex flex-column">
                                   <small class="text-secondary mb-1">
                                   ${m.incidentType}</small>
-                                  <small class="mb-1">Threat: ${m.severity
-                                    .charAt(0)
-                                    .toUpperCase() +
-                                    m.severity.slice(1)}</small>
+                                  <small class="mb-1">Threat: ${
+                                    m.severity.charAt(0).toUpperCase() +
+                                    m.severity.slice(1)
+                                  }</small>
                                   <a href="${
                                     m.url
                                   }" target="_blank" class="btn btn-sm btn-block btn-custom">Read more</a>
@@ -112,8 +114,8 @@ export default {
         this.infoWinOpen = true;
         this.currentMidx = i;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

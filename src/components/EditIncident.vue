@@ -12,7 +12,7 @@
         fullscreenControl: false,
         maxZoom: 15,
         minZoom: 2,
-        styles: options
+        styles: options,
       }"
     >
       <gmap-marker
@@ -94,7 +94,9 @@
             class="form-control"
             v-model="incidentType"
           >
-            <option value="Select an incident type" selected disabled>Incident type</option>
+            <option value="Select an incident type" selected disabled>
+              Incident type
+            </option>
             <option value="Accident">Accident</option>
             <option value="Firearms">Firearms</option>
             <option value="Terrorism">Terrorism</option>
@@ -107,8 +109,15 @@
         </div>
         <div class="form-group">
           <label for="severity">Severity:</label>
-          <select name="severity" id="severity" class="form-control" v-model="severity">
-            <option value="Select a threat level" selected disabled>Severity</option>
+          <select
+            name="severity"
+            id="severity"
+            class="form-control"
+            v-model="severity"
+          >
+            <option value="Select a threat level" selected disabled>
+              Severity
+            </option>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
@@ -116,7 +125,13 @@
         </div>
 
         <div class="form-group mb-5">
-          <button id="create-incident" type="submit" class="btn btn-block btn-warning">Update Alert</button>
+          <button
+            id="create-incident"
+            type="submit"
+            class="btn btn-block btn-warning"
+          >
+            Update Alert
+          </button>
         </div>
       </form>
     </div>
@@ -143,12 +158,11 @@ export default {
       auditSource: "",
       incidentType: "",
       severity: "",
-      user_id: ""
+      user_id: "",
     };
   },
 
   mounted() {
-    //this.geolocate();
     this.populateForm();
   },
 
@@ -160,7 +174,7 @@ export default {
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
+          lng: this.currentPlace.geometry.location.lng(),
         };
         this.markers.push({ position: marker });
         this.places.push(this.currentPlace);
@@ -169,19 +183,17 @@ export default {
       }
     },
     updateAlert() {
-      db.collection("incidents")
-        .doc(this.$route.params.id)
-        .set({
-          lat: this.center.lat,
-          lng: this.center.lng,
-          headline: this.headline,
-          description: this.description,
-          auditSource: this.auditSource,
-          incidentType: this.incidentType,
-          severity: this.severity,
-          timestamp: Date.now(),
-          user_id: firebase.auth().currentUser.uid
-        });
+      db.collection("incidents").doc(this.$route.params.id).set({
+        lat: this.center.lat,
+        lng: this.center.lng,
+        headline: this.headline,
+        description: this.description,
+        auditSource: this.auditSource,
+        incidentType: this.incidentType,
+        severity: this.severity,
+        timestamp: Date.now(),
+        user_id: firebase.auth().currentUser.uid,
+      });
 
       (this.places = []),
         (this.lat = null),
@@ -192,11 +204,11 @@ export default {
         (this.incidentType = null),
         (this.severity = null);
     },
-    geolocate: function() {
-      navigator.geolocation.getCurrentPosition(position => {
+    geolocate: function () {
+      navigator.geolocation.getCurrentPosition((position) => {
         this.center = {
           lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lng: position.coords.longitude,
         };
       });
     },
@@ -204,7 +216,7 @@ export default {
       let ref = db.collection("incidents").doc(this.$route.params.id);
 
       // get data object from firestore
-      ref.get().then(doc => {
+      ref.get().then((doc) => {
         // set props to data from firestore
         this.center.lat = doc.data().lat;
         this.center.lng = doc.data().lng;
@@ -214,8 +226,8 @@ export default {
         this.incidentType = doc.data().incidentType;
         this.severity = doc.data().severity;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

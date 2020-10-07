@@ -45,7 +45,7 @@
             <li
               v-if="
                 (user && this.$route.path == '/') ||
-                  this.$route.path == `/profile/${user_id}`
+                this.$route.path == `/profile/${user_id}`
               "
               class="nav-item"
             >
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       user: null,
-      user_id: null
+      user_id: null,
     };
   },
 
@@ -80,20 +80,19 @@ export default {
         .then(() => {
           this.$router.push({ name: "Login" });
         });
-    }
+    },
   },
 
   created() {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.user = firebase.auth().currentUser;
         this.user_id = firebase.auth().currentUser.uid;
-        //console.log(this.user);
       } else {
         this.user = null;
       }
     });
-  }
+  },
 };
 </script>
 
