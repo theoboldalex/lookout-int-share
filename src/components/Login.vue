@@ -54,7 +54,6 @@ export default {
     // log a user in
     login() {
       if (this.email && this.password) {
-        console.log("working");
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
